@@ -12,10 +12,10 @@ https://flutter.dev/docs/get-started/install/windows
 8. Installi uusim Android Studio, kui flutter doctor seda raporteeris
 9. Installi Flutter ja Dart'i plugin Android Studiole. See tagab startup template, et luua uus Flutteri aplikatsioon, võimaluse käivitada ja debugida Flutteri aplikatsiooni Android Studios endas: 
 
-9.1 Ava Android Studio.
-9.2 Vajuta File → Settings → Plugins.
-9.3 Vali Flutteri plugin and vajuta Install.
-9.4 Vajuta Yes, kui soovitakse installida Darti plugin.
+9.1 Ava Android Studio.<br>
+9.2 Vajuta File → Settings → Plugins.<br>
+9.3 Vali Flutteri plugin and vajuta Install.<br>
+9.4 Vajuta Yes, kui soovitakse installida Darti plugin.<br>
 9.5 Restarti Android studio.
 
 <b>Macile installeerimine</b>
@@ -37,10 +37,10 @@ echo $PATH
 10. Käivita IOS simulaator
 11. 9. Installi Flutter ja Dart'i plugin Android Studiole. See tagab startup template, et luua uus Flutteri aplikatsioon, võimaluse käivitada ja debugida Flutteri aplikatsiooni Android Studios endas: 
 
-9.1 Ava Android Studio.
-9.2 Vajuta Preferences -> Plugins.
-9.3 Vali Flutteri plugin and vajuta Install.
-9.4 Vajuta Yes, kui soovitakse installida Darti plugin.
+9.1 Ava Android Studio.<br>
+9.2 Vajuta Preferences -> Plugins.<br>
+9.3 Vali Flutteri plugin and vajuta Install.<br>
+9.4 Vajuta Yes, kui soovitakse installida Darti plugin.<br>
 9.5 Restarti Android studio.
 
 
