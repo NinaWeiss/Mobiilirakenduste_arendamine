@@ -35,7 +35,7 @@ echo $PATH
 8. Installi uusim Android Studio, kui flutter doctor seda raporteeris
 9. Ava Androidi emulaator 
 10. Käivita IOS simulaator
-11. 9. Installi Flutter ja Dart'i plugin Android Studiole. See tagab startup template, et luua uus Flutteri aplikatsioon, võimaluse käivitada ja debugida Flutteri aplikatsiooni Android Studios endas: 
+11. Installi Flutter ja Dart'i plugin Android Studiole. See tagab startup template, et luua uus Flutteri aplikatsioon, võimaluse käivitada ja debugida Flutteri aplikatsiooni Android Studios endas: 
 
 9.1 Ava Android Studio.<br>
 9.2 Vajuta Preferences -> Plugins.<br>
