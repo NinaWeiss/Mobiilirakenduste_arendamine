@@ -49,7 +49,7 @@ echo $PATH
 Android Studio installimine, kõik hakkas ilusti tööle, ka emulaator
 
 ÜLESANDE 3:
-url'i kaudu videot mängivad
+* url'i kaudu videot mängivad
 
 
 ## mis osutus raskeks
@@ -58,8 +58,8 @@ Oli mitu veateadet, kui proovisime füüsilist seadet ühendada. Oli vaja välja
 Gitiga olid probleemid, et ei leidnud path'i
 
 ÜLESANDE 3:
-lisatud video assets'ina ei mängi(siiamaani ei saa aru miks)
-pubspec.yaml file'iga olid probleemid formateeringu pärast
+* lisatud video assets'ina ei mängi(siiamaani ei saa aru miks)
+* pubspec.yaml file'iga olid probleemid formateeringu pärast
 
 
 
