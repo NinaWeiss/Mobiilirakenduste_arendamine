@@ -25,12 +25,20 @@ class DrawerOnly extends StatelessWidget{
     return new Drawer(
     child: new ListView(
     children:<Widget>[
-    new DrawerHeader(
-    child: new Text("Categories"),
-    decoration: new BoxDecoration(color: Colors.greenAccent),
+      Container(
+      height: 55.0,
+      child: DrawerHeader(
+          child: Text('Categories', style: TextStyle(color: Colors.white , fontSize: 18.0)),
+          decoration: BoxDecoration(
+              color: Colors.blue
+          ),
+          margin: EdgeInsets.all(0.0),
+          padding: EdgeInsets.all(0.0)
+      ),
     ),
       new ListTile(
         title: new Text("Home"),
+          trailing: Icon(Icons.keyboard_arrow_right),
         onTap: (){
           Navigator.pop(ctxt);
           Navigator.push(ctxt, new MaterialPageRoute(builder: (ctxt) => new MyHomePage()));
@@ -38,7 +46,10 @@ class DrawerOnly extends StatelessWidget{
           selectedTileColor: Colors.amber
       ),
     new ListTile(
-    //leading: const Image(Image.add)
+    leading: CircleAvatar(
+    backgroundImage: NetworkImage('https://motorblock.at/wp-content/uploads/2018/09/Tom-der-Abschleppwagen.jpg'),
+    ),
+      trailing: Icon(Icons.keyboard_arrow_right),
     title: new Text("Puksiirauto Tom"),
     onTap: (){
     Navigator.pop(ctxt);
@@ -46,8 +57,11 @@ class DrawerOnly extends StatelessWidget{
     },
     ),
     new ListTile(
-    //leading: const Image(Image.add)
+    leading: CircleAvatar(
+    backgroundImage: NetworkImage('https://specials-images.forbesimg.com/imageserve/5fd7928e1f37990503a26dbb/960x0.jpg?fit=scale'),
+    ),
     title: new Text("CoComelon Baby"),
+      trailing: Icon(Icons.keyboard_arrow_right),
     onTap: (){
     Navigator.pop(ctxt);
     Navigator.push(ctxt, new MaterialPageRoute(builder: (ctxt) => new CoComelonBabyPage()));
