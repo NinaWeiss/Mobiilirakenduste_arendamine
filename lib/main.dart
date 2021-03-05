@@ -38,6 +38,8 @@ class DrawerOnly extends StatelessWidget{
     ),
       new ListTile(
         title: new Text("Home"),
+          leading: Icon(Icons.home),
+          //tileColor: Colors.cyan,
           trailing: Icon(Icons.keyboard_arrow_right),
         onTap: (){
           Navigator.pop(ctxt);
