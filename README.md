@@ -49,7 +49,8 @@ echo $PATH
 * Android Studio installimine, kõik hakkas ilusti tööle, ka emulaator
 
 ÜLESANDE 3:
-* url'i kaudu videot mängivad
+* url'i kaudu videod mängivad
+* mitmeleheline lahedus
 
 
 ## mis osutus raskeks
