@@ -45,12 +45,12 @@ echo $PATH
 
 
 ## mis osutus kergeks
-Ülesande 1:
+Ülesanne 1:
 * Android Studio installimine, kõik hakkas ilusti tööle, ka emulaator
 
-ÜLESANDE 3:
-* url'i kaudu videod mängivad
-* mitmeleheline lahedus
+ÜLESANNE 3:
+* URL'i kaudu videod mängivad
+* Mitmeleheline lahedus
 
 
 ## mis osutus raskeks
@@ -59,8 +59,8 @@ echo $PATH
 * Gitiga olid probleemid, et ei leidnud path'i
 
 ÜLESANDE 3:
-* lisatud video assets'ina ei mängi(siiamaani ei saa aru miks)
-* pubspec.yaml file'iga olid probleemid formateeringu pärast
+* Lisatud video assets'ina ei mängi (siiamaani ei saa aru miks)
+* Pubspec.yaml file'iga olid probleemid formateeringu pärast
 
 
 
