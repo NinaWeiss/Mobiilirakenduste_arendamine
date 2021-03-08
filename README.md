@@ -54,11 +54,11 @@ echo $PATH
 
 
 ## mis osutus raskeks
-Ülesande 1:
+Ülesanne 1:
 * Oli mitu veateadet, kui proovisime füüsilist seadet ühendada. Oli vaja välja nuputada, mida vaja telefoni settingutes ümber muuta.
 * Gitiga olid probleemid, et ei leidnud path'i
 
-ÜLESANDE 3:
+ÜLESANNE 3:
 * Lisatud video assets'ina ei mängi (siiamaani ei saa aru miks)
 * Pubspec.yaml file'iga olid probleemid formateeringu pärast
 
