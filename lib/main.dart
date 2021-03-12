@@ -1,20 +1,29 @@
 //import 'package:chewie_prep/chewie_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'camera_screen.dart';
 import 'chewie_list_item.dart';
+import 'package:camera/camera.dart';
 
-void main() => runApp(MyApp());
 
+List<CameraDescription> cameras;
 
+Future<Null> main()  async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+  runApp(MyApp());
+
+}
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext ctxt) {
-    return MaterialApp(
+    return new MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
+      home: new MyHomePage(cameras),
     );
   }
 }
@@ -43,7 +52,7 @@ class DrawerOnly extends StatelessWidget{
           trailing: Icon(Icons.keyboard_arrow_right),
         onTap: (){
           Navigator.pop(ctxt);
-          Navigator.push(ctxt, new MaterialPageRoute(builder: (ctxt) => new MyHomePage()));
+          Navigator.push(ctxt, new MaterialPageRoute(builder: (ctxt) => new MyHomePage(cameras)));
         },
           selectedTileColor: Colors.amber
       ),
@@ -75,16 +84,56 @@ class DrawerOnly extends StatelessWidget{
 
   }
 }
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  var cameras;
+  MyHomePage(this.cameras);
 
   @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+
+  TabController _tabController;
+  bool showFab = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _tabController = TabController(vsync: this, initialIndex: 0, length: 2);
+    _tabController.addListener(() {
+      if (_tabController.index == 1) {
+        showFab = true;
+      } else {
+        showFab = false;
+      }
+      setState(() {});
+    });
+  }
   Widget build(BuildContext ctxt) {
     return Scaffold(
       drawer: new DrawerOnly(),
       appBar: AppBar(
         title: Text('Home'),
+        bottom: TabBar(
+          controller: _tabController,
+              indicatorColor: Colors.white,
+              tabs: <Widget>[
+                Tab(icon: Icon(Icons.play_arrow)),
+                Tab(icon: Icon(Icons.camera_alt)),
+              ],
+        ),
       ),
-      body: ListView(
+        body:
+        new TabBarView(
+        controller: _tabController,
+          children: <Widget>[
+            VideoItemList(),
+            CameraScreen(widget.cameras),
+          ],
+      ),
+        /*body: new ListView(
         children: <Widget>[
          /* ChewieListItem(
             videoPlayerController: VideoPlayerController.asset(
@@ -104,7 +153,36 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
+      ),*/
     );
+  }
+}
+
+class VideoItemList extends StatelessWidget {
+  @override
+  Widget build(BuildContext ctxt) {
+  return new Scaffold(
+  body: ListView(
+  children: <Widget>[
+  /* ChewieListItem(
+            videoPlayerController: VideoPlayerController.asset(
+              'videos/BabyShark.mp4',
+            ),
+            looping: true,
+          ),*/
+  ChewieListItem(
+  videoPlayerController: VideoPlayerController.network(
+  'https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_1280_10MG.mp4',
+  ),
+  ),
+  ChewieListItem(
+  videoPlayerController: VideoPlayerController.network(
+  'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4',
+  ),
+  ),
+  ],
+  ),
+  );
   }
 }
 
