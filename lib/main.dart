@@ -150,12 +150,16 @@ class LandingScreen extends StatefulWidget {
 
 class _LandingScreenState extends State<LandingScreen> {
   File imageFile;
+  File videoFile;
 
   _openGallery(BuildContext context) async{
     // ignore: deprecated_member_use
     var picture= await ImagePicker.pickImage(source: ImageSource.gallery);
+    // ignore: deprecated_member_use
+    var video= await ImagePicker.pickVideo(source: ImageSource.gallery);
     this.setState((){
       imageFile=picture;
+      videoFile=video;
     });
 
     Navigator.of(context).pop();
@@ -170,10 +174,18 @@ class _LandingScreenState extends State<LandingScreen> {
     Navigator.of(context).pop();
   }
 
+  _recordVideo(BuildContext context) async{
+    // ignore: deprecated_member_use
+    var video= await ImagePicker.pickVideo(source: ImageSource.camera);
+    this.setState((){
+      videoFile=video;
+    });
+    Navigator.of(context).pop();
+  }
+
   Future<void> _showChoiceDialog(BuildContext context){
     return showDialog(context: context,builder:(BuildContext context){
       return AlertDialog(
-        title: Text("Make a choice"),
         content: SingleChildScrollView(
           child: ListBody(
             children:<Widget>[
@@ -190,6 +202,13 @@ class _LandingScreenState extends State<LandingScreen> {
                   _openCamera(context);
                 },
               ),
+              Padding(padding:EdgeInsets.all(8.0)),
+              GestureDetector(
+                child: Text("Video"),
+                onTap: (){
+                  _recordVideo(context);
+                },
+              ),
             ],
           ),
         ),
@@ -201,21 +220,29 @@ class _LandingScreenState extends State<LandingScreen> {
     if(imageFile == null){
       return Text("No image selected");
     }else{
-      Image.file(imageFile,width: 400,height: 400);
+      return Image.file(imageFile,width: 200,height: 200);
+    }
+  }
+  
+  Widget _decideVideoView(){
+    if(videoFile == null){
+      return Text("No video selected");
+    }else{
+      return ChewieListItem(videoPlayerController: VideoPlayerController.file(videoFile));
     }
   }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar:AppBar(
-      ),
+
         body: Container(
           child: Center(
             child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 _decideImageView(),
+                _decideVideoView(),
                 RaisedButton(onPressed:(){
                   _showChoiceDialog(context);
                 },child: Text("Select Image"),)
