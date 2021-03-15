@@ -1,22 +1,20 @@
 //import 'package:chewie_prep/chewie_list_item.dart';
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/chewie_list_item.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
-import 'camera_screen.dart';
-import 'chewie_list_item.dart';
-import 'package:camera/camera.dart';
-
 
 List<CameraDescription> cameras;
 
-Future<Null> main()  async {
+Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
   runApp(MyApp());
-
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext ctxt) {
@@ -31,72 +29,78 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class DrawerOnly extends StatelessWidget{
+class DrawerOnly extends StatelessWidget {
   @override
   Widget build(BuildContext ctxt) {
     return new Drawer(
-    child: new ListView(
-    children:<Widget>[
-      Container(
-      height: 55.0,
-      child: DrawerHeader(
-          child: Text('Categories', style: TextStyle(color: Colors.white , fontSize: 18.0)),
-          decoration: BoxDecoration(
-              color: Colors.blue
+        child: new ListView(
+      children: <Widget>[
+        Container(
+          height: 55.0,
+          child: DrawerHeader(
+              child: Text('Categories',
+                  style: TextStyle(color: Colors.white, fontSize: 18.0)),
+              decoration: BoxDecoration(color: Colors.blue),
+              margin: EdgeInsets.all(0.0),
+              padding: EdgeInsets.all(0.0)),
+        ),
+        new ListTile(
+            title: new Text("Home"),
+            leading: Icon(Icons.home),
+            //tileColor: Colors.cyan,
+            trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              Navigator.pop(ctxt);
+              Navigator.push(
+                  ctxt,
+                  new MaterialPageRoute(
+                      builder: (ctxt) => new MyHomePage(cameras)));
+            },
+            selectedTileColor: Colors.amber),
+        new ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(
+                'https://motorblock.at/wp-content/uploads/2018/09/Tom-der-Abschleppwagen.jpg'),
           ),
-          margin: EdgeInsets.all(0.0),
-          padding: EdgeInsets.all(0.0)
-      ),
-    ),
-      new ListTile(
-        title: new Text("Home"),
-          leading: Icon(Icons.home),
-          //tileColor: Colors.cyan,
           trailing: Icon(Icons.keyboard_arrow_right),
-        onTap: (){
-          Navigator.pop(ctxt);
-          Navigator.push(ctxt, new MaterialPageRoute(builder: (ctxt) => new MyHomePage(cameras)));
-        },
-          selectedTileColor: Colors.amber
-      ),
-    new ListTile(
-    leading: CircleAvatar(
-    backgroundImage: NetworkImage('https://motorblock.at/wp-content/uploads/2018/09/Tom-der-Abschleppwagen.jpg'),
-    ),
-      trailing: Icon(Icons.keyboard_arrow_right),
-    title: new Text("Puksiirauto Tom"),
-    onTap: (){
-    Navigator.pop(ctxt);
-    Navigator.push(ctxt, new MaterialPageRoute(builder: (ctxt) => new SecondPage()));
-    },
-    ),
-    new ListTile(
-    leading: CircleAvatar(
-    backgroundImage: NetworkImage('https://specials-images.forbesimg.com/imageserve/5fd7928e1f37990503a26dbb/960x0.jpg?fit=scale'),
-    ),
-    title: new Text("CoComelon Baby"),
-      trailing: Icon(Icons.keyboard_arrow_right),
-    onTap: (){
-    Navigator.pop(ctxt);
-    Navigator.push(ctxt, new MaterialPageRoute(builder: (ctxt) => new CoComelonBabyPage()));
-    },
-    )
-    ],
-    )
-    );
-
+          title: new Text("Puksiirauto Tom"),
+          onTap: () {
+            Navigator.pop(ctxt);
+            Navigator.push(ctxt,
+                new MaterialPageRoute(builder: (ctxt) => new SecondPage()));
+          },
+        ),
+        new ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(
+                'https://specials-images.forbesimg.com/imageserve/5fd7928e1f37990503a26dbb/960x0.jpg?fit=scale'),
+          ),
+          title: new Text("CoComelon Baby"),
+          trailing: Icon(Icons.keyboard_arrow_right),
+          onTap: () {
+            Navigator.pop(ctxt);
+            Navigator.push(
+                ctxt,
+                new MaterialPageRoute(
+                    builder: (ctxt) => new CoComelonBabyPage()));
+          },
+        )
+      ],
+    ));
   }
 }
+
 class MyHomePage extends StatefulWidget {
   var cameras;
+
   MyHomePage(this.cameras);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
-
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
   bool showFab = true;
 
@@ -114,6 +118,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
       setState(() {});
     });
   }
+
   Widget build(BuildContext ctxt) {
     return Scaffold(
       drawer: new DrawerOnly(),
@@ -121,29 +126,26 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         title: Text('Home'),
         bottom: TabBar(
           controller: _tabController,
-              indicatorColor: Colors.white,
-              tabs: <Widget>[
-                Tab(icon: Icon(Icons.home)),
-                Tab(icon: Icon(Icons.camera_alt)),
-              ],
+          indicatorColor: Colors.white,
+          tabs: <Widget>[
+            Tab(icon: Icon(Icons.home)),
+            Tab(icon: Icon(Icons.camera_alt)),
+          ],
         ),
       ),
-        body:
-        new TabBarView(
+      body: new TabBarView(
         controller: _tabController,
-          children: <Widget>[
-            VideoItemList(),
-            LandingScreen(),
-            //CameraScreen(widget.cameras),
-          ],
+        children: <Widget>[
+          VideoItemList(),
+          LandingScreen(),
+          //CameraScreen(widget.cameras),
+        ],
       ),
-
     );
   }
 }
 
 class LandingScreen extends StatefulWidget {
-
   @override
   _LandingScreenState createState() => _LandingScreenState();
 }
@@ -153,11 +155,9 @@ class _LandingScreenState extends State<LandingScreen> {
   File videoFile;
 
   _openGallery(BuildContext context) async {
-    // ignore: deprecated_member_use
-    // var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
     var picture = await ImagePicker().getImage(source: ImageSource.gallery);
-    // ignore: deprecated_member_use
     var video = await ImagePicker().getVideo(source: ImageSource.gallery);
+
     this.setState(() {
       imageFile = File(picture.path);
       videoFile = File(video.path);
@@ -177,112 +177,115 @@ class _LandingScreenState extends State<LandingScreen> {
 
   _recordVideo(BuildContext context) async {
     // ignore: deprecated_member_use
-    var video = await ImagePicker().getVideo(source: ImageSource.camera);
+    var video = await ImagePicker().getVideo(source: ImageSource.gallery);
     this.setState(() {
       videoFile = File(video.path);
     });
     Navigator.of(context).pop();
   }
 
-  Future<void> _showChoiceDialog(BuildContext context){
-    return showDialog(context: context,builder:(BuildContext context){
-      return AlertDialog(
-        content: SingleChildScrollView(
-          child: ListBody(
-            children:<Widget>[
-              GestureDetector(
-                child: Text("Gallery"),
-                onTap: (){
-                  _openGallery(context);
-                },
+  Future<void> _showChoiceDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  GestureDetector(
+                    child: Text("Gallery"),
+                    onTap: () {
+                      _openGallery(context);
+                    },
+                  ),
+                  Padding(padding: EdgeInsets.all(8.0)),
+                  GestureDetector(
+                    child: Text("Camera"),
+                    onTap: () {
+                      _openCamera(context);
+                    },
+                  ),
+                  Padding(padding: EdgeInsets.all(8.0)),
+                  GestureDetector(
+                    child: Text("Video"),
+                    onTap: () {
+                      _recordVideo(context);
+                    },
+                  ),
+                ],
               ),
-              Padding(padding:EdgeInsets.all(8.0)),
-              GestureDetector(
-                child: Text("Camera"),
-                onTap: (){
-                  _openCamera(context);
-                },
-              ),
-              Padding(padding:EdgeInsets.all(8.0)),
-              GestureDetector(
-                child: Text("Video"),
-                onTap: (){
-                  _recordVideo(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      );
-    });
+            ),
+          );
+        });
   }
 
-  Widget _decideImageView(){
-    if(imageFile == null){
+  Widget _decideImageView() {
+    if (imageFile == null) {
       return Text("No image selected");
-    }else{
-      return Image.file(imageFile,width: 200,height: 200);
+    } else {
+      return Image.file(imageFile, width: 200, height: 200);
     }
   }
-  
-  Widget _decideVideoView(){
-    if(videoFile == null){
+
+  Widget _decideVideoView() {
+    if (videoFile == null) {
       return Text("No video selected");
-    }else{
-      return ChewieListItem(videoPlayerController: VideoPlayerController.file(videoFile));
+    } else {
+      return ChewieListItem(
+          videoPlayerController: VideoPlayerController.file(videoFile));
     }
   }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-
-        body: Container(
-          child: Center(
-            child: Column(
+      body: Container(
+        child: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                _decideImageView(),
-                _decideVideoView(),
-                RaisedButton(onPressed:(){
+            children: <Widget>[
+              _decideImageView(),
+              _decideVideoView(),
+              RaisedButton(
+                onPressed: () {
                   _showChoiceDialog(context);
-                },child: Text("Select Image"),)
+                },
+                child: Text("Select Image"),
+              )
             ],
-            ),
           ),
         ),
+      ),
     );
   }
 }
 
-
-
-
 class VideoItemList extends StatelessWidget {
   @override
   Widget build(BuildContext ctxt) {
-  return new Scaffold(
-  body: ListView(
-  children: <Widget>[
-  /* ChewieListItem(
+    return new Scaffold(
+      body: ListView(
+        children: <Widget>[
+          /* ChewieListItem(
             videoPlayerController: VideoPlayerController.asset(
               'videos/BabyShark.mp4',
             ),
             looping: true,
           ),*/
-  ChewieListItem(
-  videoPlayerController: VideoPlayerController.network(
-  'https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_1280_10MG.mp4',
-  ),
-  ),
-  ChewieListItem(
-  videoPlayerController: VideoPlayerController.network(
-  'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4',
-  ),
-  ),
-  ],
-  ),
-  );
+          ChewieListItem(
+            videoPlayerController: VideoPlayerController.network(
+              'https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_1280_10MG.mp4',
+            ),
+          ),
+          ChewieListItem(
+            videoPlayerController: VideoPlayerController.network(
+              'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4',
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -349,7 +352,3 @@ class CoComelonBabyPage extends StatelessWidget {
     );
   }
 }
-
-
-
-
