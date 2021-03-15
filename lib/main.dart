@@ -152,33 +152,34 @@ class _LandingScreenState extends State<LandingScreen> {
   File imageFile;
   File videoFile;
 
-  _openGallery(BuildContext context) async{
+  _openGallery(BuildContext context) async {
     // ignore: deprecated_member_use
-    var picture= await ImagePicker.pickImage(source: ImageSource.gallery);
+    // var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var picture = await ImagePicker().getImage(source: ImageSource.gallery);
     // ignore: deprecated_member_use
-    var video= await ImagePicker.pickVideo(source: ImageSource.gallery);
-    this.setState((){
-      imageFile=picture;
-      videoFile=video;
+    var video = await ImagePicker().getVideo(source: ImageSource.gallery);
+    this.setState(() {
+      imageFile = File(picture.path);
+      videoFile = File(video.path);
     });
 
     Navigator.of(context).pop();
   }
 
-  _openCamera(BuildContext context) async{
+  _openCamera(BuildContext context) async {
     // ignore: deprecated_member_use
-    var picture= await ImagePicker.pickImage(source: ImageSource.camera);
-    this.setState((){
-      imageFile=picture;
+    var picture = await ImagePicker().getImage(source: ImageSource.camera);
+    this.setState(() {
+      imageFile = File(picture.path);
     });
     Navigator.of(context).pop();
   }
 
-  _recordVideo(BuildContext context) async{
+  _recordVideo(BuildContext context) async {
     // ignore: deprecated_member_use
-    var video= await ImagePicker.pickVideo(source: ImageSource.camera);
-    this.setState((){
-      videoFile=video;
+    var video = await ImagePicker().getVideo(source: ImageSource.camera);
+    this.setState(() {
+      videoFile = File(video.path);
     });
     Navigator.of(context).pop();
   }
