@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/chewie_list_item.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 List<CameraDescription> cameras;
 
@@ -57,6 +59,16 @@ class DrawerOnly extends StatelessWidget {
                       builder: (ctxt) => new MyHomePage(cameras)));
             },
             selectedTileColor: Colors.amber),
+        new ListTile(
+          title: new Text("Settings"),
+          leading: Icon(Icons.settings),
+          trailing: Icon(Icons.keyboard_arrow_right),
+          onTap: () {
+            Navigator.pop(ctxt);
+            Navigator.push(ctxt,
+                new MaterialPageRoute(builder: (ctxt) => new SettingsPage()));
+          },
+        ),
         new ListTile(
           leading: CircleAvatar(
             backgroundImage: NetworkImage(
@@ -172,6 +184,7 @@ class _LandingScreenState extends State<LandingScreen> {
     this.setState(() {
       imageFile = File(picture.path);
     });
+    GallerySaver.saveImage(picture.path);
     Navigator.of(context).pop();
   }
 
@@ -181,6 +194,7 @@ class _LandingScreenState extends State<LandingScreen> {
     this.setState(() {
       videoFile = File(video.path);
     });
+    GallerySaver.saveVideo(video.path);
     Navigator.of(context).pop();
   }
 
@@ -351,4 +365,51 @@ class CoComelonBabyPage extends StatelessWidget {
       ),
     );
   }
+}
+
+
+class SettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext ctxt) {
+    this.readFile();
+    return new Scaffold(
+      drawer: new DrawerOnly(),
+      appBar: AppBar(
+        title: Text('Settings'),
+      ),
+      body: ListView(
+        children: <Widget>[
+          
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+            ),
+            onChanged: (text) {
+              this.saveFile(text);
+            },
+          ),
+
+        ],
+      ),
+    );
+  }
+  Future<String> getFilePath() async {
+    Directory appDocumentsDirectory = await getApplicationDocumentsDirectory(); // 1
+    String appDocumentsPath = appDocumentsDirectory.path; // 2
+    String filePath = '$appDocumentsPath/appSettings.txt'; // 3
+
+    return filePath;
+  }
+
+  void saveFile(txt) async {
+    File file = File(await getFilePath()); // 1
+    file.writeAsString(txt); // 2
+  }
+  void readFile() async {
+    File file = File(await getFilePath()); // 1
+    String fileContent = await file.readAsString(); // 2
+
+    print('File Content: $fileContent');
+  }
+
 }
