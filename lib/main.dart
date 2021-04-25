@@ -1,5 +1,7 @@
 //import 'package:chewie_prep/chewie_list_item.dart';
 import 'dart:io';
+import 'dart:async';
+import 'dart:convert';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:gallery_saver/gallery_saver.dart';
+import 'package:http/http.dart' as http;
+
 
 List<CameraDescription> cameras;
 
@@ -96,7 +100,7 @@ class DrawerOnly extends StatelessWidget {
                 new MaterialPageRoute(
                     builder: (ctxt) => new CoComelonBabyPage()));
           },
-        )
+        ),
       ],
     ));
   }
@@ -379,7 +383,7 @@ class SettingsPage extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          
+
           TextField(
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -413,3 +417,5 @@ class SettingsPage extends StatelessWidget {
   }
 
 }
+
+
