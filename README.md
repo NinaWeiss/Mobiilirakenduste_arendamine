@@ -52,6 +52,9 @@ echo $PATH
 * URL'i kaudu videod mängivad
 * Mitmeleheline lahedus
 
+ÜLESANNE 7:
+* Teksti kuvamine ja kontrollimine JSON-i andmebaasist
+
 
 ## mis osutus raskeks
 Ülesanne 1:
@@ -61,6 +64,10 @@ echo $PATH
 ÜLESANNE 3:
 * Lisatud video assets'ina ei mängi (siiamaani ei saa aru miks)
 * Pubspec.yaml file'iga olid probleemid formateeringu pärast
+
+ÜLESANNE 7:
+* Olid veateated parameetritega, et ei aksepteerinud, neid mida andsime.
+
 
 
 
